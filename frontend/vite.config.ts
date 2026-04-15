@@ -67,6 +67,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    // GitHub Pages 部署路径
+    base: '/campus_zhihu/',
     sourcemap: false,
     // 消除打包大小超过 500kb 警告
     chunkSizeWarningLimit: 2000,
