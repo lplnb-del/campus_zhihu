@@ -1,0 +1,214 @@
+# ==========================================
+# CampusZhihu Application Configuration
+# ==========================================
+spring:
+  application:
+    name: campus-zhihu
+
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/campus_zhihu?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD}
+    druid:
+      # 初始连接数
+      initial-size: 5
+      # 最小连接池数量
+      min-idle: 10
+      # 最大连接池数量
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      # 检测连接是否有效的 SQL
+      validation-query: SELECT 1
+      # 是否缓存 preparedStatement
+      pool-prepared-statements: true
+      # 配置监控统计拦截的 filters
+      filters: stat,wall,slf4j
+      # 通过 connectProperties 属性来打开 mergeSql 功能；慢 SQL 记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # Web 监控配置
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: ${DRUID_USERNAME:admin}
+        login-password: ${DRUID_PASSWORD:admin123456}
+
+  # Jackson 配置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  # 邮件配置
+  mail:
+    host: ${MAIL_HOST:smtp.qq.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        debug: false
+
+  # Security 配置（暂时禁用默认配置，使用自定义 JWT）
+  security:
+    user:
+      name: admin
+      password: admin
+
+  # Redis 配置
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      timeout: 3000ms
+      lettuce:
+        pool:
+          # 连接池最大连接数（使用负值表示没有限制）
+          max-active: 8
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+          # 连接池中的最大空闲连接
+          max-idle: 8
+          # 连接池中的最小空闲连接
+          min-idle: 0
+
+  # Cache 配置
+  cache:
+    type: redis
+    redis:
+      # 缓存过期时间（默认30分钟）
+      time-to-live: 1800000
+      # 是否缓存空值（防止缓存穿透）
+      cache-null-values: false
+      # 缓存键前缀
+      key-prefix: "campus:"
+      # 是否使用键前缀
+      use-key-prefix: true
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  # 配置 Mapper XML 文件位置
+  mapper-locations: classpath*:/mapper/**/*.xml
+  # 配置 MyBatis 别名包扫描
+  type-aliases-package: com.campus.zhihu.entity
+  # 全局配置
+  global-config:
+    # 数据库相关配置
+    db-config:
+      # 主键类型（AUTO: 数据库自增）
+      id-type: AUTO
+      # 逻辑删除字段
+      logic-delete-field: isDeleted
+      # 逻辑删除值（1 表示已删除）
+      logic-delete-value: 1
+      # 逻辑未删除值（0 表示未删除）
+      logic-not-delete-value: 0
+    # 是否打印 Logo
+    banner: false
+  # MyBatis 原生配置
+  configuration:
+    # 驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 日志实现
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 缓存
+    cache-enabled: false
+
+# MinIO 文件存储配置
+minio:
+  endpoint: http://localhost:9000
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:}
+  bucket-name: campus-zhihu
+
+# JWT 配置
+jwt:
+  # 密钥（必须通过环境变量设置，无默认值以确保安全）
+  secret: ${JWT_SECRET}
+  # Access Token 过期时间（15分钟，单位：毫秒）
+  access-token-expiration: 900000
+  # Refresh Token 过期时间（7天，单位：毫秒）
+  refresh-token-expiration: 604800000
+  # Token 有效期（7天，单位：毫秒，用于向后兼容）
+  expiration: 604800000
+  # Token 请求头名称
+  header: Authorization
+  # Token 前缀
+  prefix: Bearer
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  # Tomcat 配置
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 200
+      min-spare: 10
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.campus.zhihu: DEBUG
+    com.campus.zhihu.mapper: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    name: logs/campus-zhihu.log
+    max-size: 10MB
+    max-history: 30
+
+# 自定义业务配置
+campus:
+  # 应用URL（用于生成邮件中的链接）
+  app:
+    url: ${APP_URL:http://localhost:3000}
+
+  # 积分规则
+  points:
+    # 注册赠送积分
+    register: 100
+    # 回答被采纳获得积分（额外奖励，不包括悬赏分）
+    answer-accepted: 10
+    # 每日登录奖励
+    daily-login: 5
+  # 分页配置
+  page:
+    default-size: 10
+    max-size: 100

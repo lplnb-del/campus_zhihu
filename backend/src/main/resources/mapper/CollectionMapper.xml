@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.campus.zhihu.mapper.CollectionMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="BaseResultMap" type="com.campus.zhihu.entity.BizCollection">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="target_type" property="targetType"/>
+        <result column="target_id" property="targetId"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 检查用户是否已收藏 -->
+    <select id="checkUserCollected" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM biz_collection
+        WHERE user_id = #{userId}
+          AND target_type = #{targetType}
+          AND target_id = #{targetId}
+          AND is_deleted = 0
+    </select>
+
+    <!-- 获取用户的收藏列表 -->
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT *
+        FROM biz_collection
+        WHERE user_id = #{userId}
+          AND is_deleted = 0
+        <if test="targetType != null">
+            AND target_type = #{targetType}
+        </if>
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 获取目标的收藏列表 -->
+    <select id="selectByTarget" resultMap="BaseResultMap">
+        SELECT *
+        FROM biz_collection
+        WHERE target_type = #{targetType}
+          AND target_id = #{targetId}
+          AND is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 统计用户的收藏数量 -->
+    <select id="countByUserId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM biz_collection
+        WHERE user_id = #{userId}
+          AND is_deleted = 0
+        <if test="targetType != null">
+            AND target_type = #{targetType}
+        </if>
+    </select>
+
+    <!-- 统计目标的收藏数量 -->
+    <select id="countByTarget" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM biz_collection
+        WHERE target_type = #{targetType}
+          AND target_id = #{targetId}
+          AND is_deleted = 0
+    </select>
+
+    <!-- 批量检查用户是否收藏了指定目标列表 -->
+    <select id="selectCollectedTargetIds" resultType="java.lang.Long">
+        SELECT target_id
+        FROM biz_collection
+        WHERE user_id = #{userId}
+          AND target_type = #{targetType}
+          AND is_deleted = 0
+          AND target_id IN
+        <foreach collection="targetIds" item="targetId" open="(" separator="," close=")">
+            #{targetId}
+        </foreach>
+    </select>
+
+    <!-- 物理删除收藏记录 -->
+    <delete id="physicalDelete">
+        DELETE FROM biz_collection
+        WHERE user_id = #{userId}
+          AND target_type = #{targetType}
+          AND target_id = #{targetId}
+    </delete>
+
+</mapper>

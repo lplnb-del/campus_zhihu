@@ -1,0 +1,165 @@
+/**
+ * Element Plus 主题色自定义
+ * CampusZhihu Design System - Academic Modern Style
+ */
+
+// ==========================================
+// 核心配色 (Core Colors)
+// ==========================================
+
+// 主色 - Deep Ocean Blue (代表知识与信任)
+$--el-color-primary: #0056D2 !default;
+$--el-color-primary-light-3: #3377db !default;
+$--el-color-primary-light-5: #6699e5 !default;
+$--el-color-primary-light-7: #99bbee !default;
+$--el-color-primary-light-8: #b3ccf3 !default;
+$--el-color-primary-light-9: #ccddf7 !default;
+$--el-color-primary-dark-2: #0045a8 !default;
+
+// 提亮色 - Vibrant Coral (用于活跃交互)
+$--el-color-success: #67C23A !default;
+$--el-color-warning: #E6A23C !default;
+$--el-color-danger: #FF6B6B !default;
+$--el-color-error: #FF6B6B !default;
+$--el-color-info: #909399 !default;
+
+// ==========================================
+// 文字颜色 (Text Colors)
+// ==========================================
+$--el-text-color-primary: #303133 !default;
+$--el-text-color-regular: #606266 !default;
+$--el-text-color-secondary: #909399 !default;
+$--el-text-color-placeholder: #C0C4CC !default;
+
+// ==========================================
+// 边框颜色 (Border Colors)
+// ==========================================
+$--el-border-color-base: #DCDFE6 !default;
+$--el-border-color-light: #E4E7ED !default;
+$--el-border-color-lighter: #EBEEF5 !default;
+$--el-border-color-extra-light: #F2F6FC !default;
+
+// ==========================================
+// 背景颜色 (Background Colors)
+// ==========================================
+// 使用浅灰蓝代替纯白背景，增加层次感
+$--el-background-color-base: #F5F7FA !default;
+$--el-fill-color-blank: #FFFFFF !default;
+$--el-fill-color-light: #F5F7FA !default;
+$--el-fill-color-lighter: #FAFAFA !default;
+$--el-fill-color-extra-light: #FAFCFF !default;
+$--el-fill-color-dark: #EBEDF0 !default;
+$--el-fill-color-darker: #E6E8EB !default;
+
+// ==========================================
+// 字体 (Typography)
+// ==========================================
+$--el-font-size-extra-large: 20px !default;
+$--el-font-size-large: 18px !default;
+$--el-font-size-medium: 16px !default;
+$--el-font-size-base: 14px !default;
+$--el-font-size-small: 13px !default;
+$--el-font-size-extra-small: 12px !default;
+
+$--el-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif !default;
+$--el-font-weight-primary: 500 !default;
+
+// ==========================================
+// 圆角 (Border Radius)
+// ==========================================
+$--el-border-radius-base: 4px !default;
+$--el-border-radius-small: 2px !default;
+$--el-border-radius-round: 20px !default;
+$--el-border-radius-circle: 100% !default;
+
+// 自定义圆角 - 用于卡片
+$--card-border-radius: 12px !default;
+
+// ==========================================
+// 阴影 (Box Shadow)
+// ==========================================
+$--el-box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04) !default;
+$--el-box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+$--el-box-shadow-lighter: 0 2px 8px 0 rgba(0, 0, 0, 0.06) !default;
+$--el-box-shadow-dark: 0 4px 16px 0 rgba(0, 0, 0, 0.12) !default;
+
+// 自定义阴影 - 用于卡片悬停
+$--card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !default;
+$--card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12) !default;
+
+// ==========================================
+// 过渡动画 (Transitions)
+// ==========================================
+$--el-transition-duration: 0.3s !default;
+$--el-transition-duration-fast: 0.2s !default;
+$--el-transition-function-ease-in-out-bezier: cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+
+// 自定义过渡
+$--transition-ease-out: 0.3s ease-out !default;
+
+// ==========================================
+// 层级 (Z-index)
+// ==========================================
+$--el-index-normal: 1 !default;
+$--el-index-top: 1000 !default;
+$--el-index-popper: 2000 !default;
+
+// ==========================================
+// 组件特定样式
+// ==========================================
+
+// 按钮
+$--el-button-border-radius: 8px !default;
+$--el-button-font-weight: 500 !default;
+
+// 输入框
+$--el-input-border-radius: 8px !default;
+$--el-input-height: 40px !default;
+
+// 卡片
+$--el-card-border-radius: 12px !default;
+$--el-card-padding: 20px !default;
+
+// 对话框
+$--el-dialog-border-radius: 16px !default;
+
+// ==========================================
+// 玻璃拟态效果 (Glassmorphism)
+// ==========================================
+$--glass-background: rgba(255, 255, 255, 0.8) !default;
+$--glass-blur: blur(10px) !default;
+$--glass-border: 1px solid rgba(255, 255, 255, 0.3) !default;
+
+// ==========================================
+// 悬赏积分颜色 (Reward Points Color)
+// ==========================================
+$--reward-color: #FF6B6B !default;
+$--reward-color-light: #FF8787 !default;
+$--reward-gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%) !default;
+
+// ==========================================
+// 响应式断点 (Breakpoints)
+// ==========================================
+$--sm: 768px !default;
+$--md: 992px !default;
+$--lg: 1200px !default;
+$--xl: 1920px !default;
+
+// ==========================================
+// 导出变量供 Element Plus 使用
+// ==========================================
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': #0056D2,
+    ),
+    'danger': (
+      'base': #FF6B6B,
+    ),
+  ),
+  $border-radius: (
+    'base': 8px,
+    'small': 4px,
+    'round': 20px,
+  ),
+);

@@ -1,0 +1,188 @@
+# ==========================================
+# CampusZhihu .gitignore
+# ==========================================
+
+# ==========================================
+# Java / Maven / Spring Boot
+# ==========================================
+backend/target/
+backend/*.jar
+backend/*.war
+backend/*.ear
+backend/*.class
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
+
+# Maven Wrapper
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# Log files
+backend/logs/
+backend/*.log
+backend/log/
+
+# IntelliJ IDEA
+backend/.idea/
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+backend/out/
+
+# Eclipse
+backend/.metadata
+backend/bin/
+backend/tmp/
+backend/*.tmp
+backend/*.bak
+backend/*.swp
+backend/*~.nib
+backend/local.properties
+
+# NetBeans
+backend/nbproject/private/
+backend/build/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+
+# VS Code
+backend/.vscode/
+
+# macOS
+backend/.DS_Store
+
+# ==========================================
+# Node.js / Vue / Vite
+# ==========================================
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+
+# Log files
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+# Editor directories and files
+frontend/.vscode/*
+!frontend/.vscode/extensions.json
+frontend/.idea
+frontend/.DS_Store
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
+
+# Auto-generated files
+frontend/src/auto-imports.d.ts
+frontend/src/components.d.ts
+
+# Test coverage
+frontend/coverage/
+frontend/.nyc_output/
+
+# Environment variables (local only)
+frontend/.env.local
+frontend/.env.*.local
+
+# Build outputs
+frontend/build/
+frontend/.vite/
+frontend/.cache/
+
+# ==========================================
+# Database
+# ==========================================
+*.sql.backup
+*.sql.bak
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# IDEs and Editors
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# ==========================================
+# Temporary Files
+# ==========================================
+*.tmp
+*.temp
+*.bak
+*.cache
+*.pid
+*.seed
+*.pid.lock
+
+# ==========================================
+# Package Files
+# ==========================================
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ==========================================
+# Documentation (optional - uncomment if needed)
+# ==========================================
+# docs/*.pdf
+# docs/*.docx
+
+# ==========================================
+# Custom Ignore
+# ==========================================
+# 本地配置文件（如果有敏感信息）
+application-local.yml
+application-dev.yml
+.env.development.local
+
+# 环境变量文件（包含敏感信息）
+.env
+backend/.env
+frontend/.env
+
+# 上传的文件（如果不使用 MinIO）
+uploads/
+upload/
+
+# 测试数据
+test-data/
+
+# 私有笔记
+NOTES.md
+TODO.private.md

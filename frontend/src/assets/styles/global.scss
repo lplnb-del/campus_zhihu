@@ -1,0 +1,702 @@
+/**
+ * 全局样式文件
+ * CampusZhihu - Academic Modern Design System
+ */
+
+// ==========================================
+// 全局重置和基础样式
+// ==========================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-size: 14px;
+  color: #303133;
+  background-color: #f5f7fa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+// ==========================================
+// 滚动条样式
+// ==========================================
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f7fa;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #dcdfe6;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #c0c4cc;
+  }
+}
+
+// ==========================================
+// 卡片式设计 (Card UI)
+// ==========================================
+.campus-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+
+  // 悬停效果 - 上浮
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  // 激活效果
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+// 问题卡片
+.question-card {
+  @extend .campus-card;
+  margin-bottom: 16px;
+
+  .question-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #303133;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #0056d2;
+    }
+  }
+
+  .question-content {
+    font-size: 14px;
+    color: #606266;
+    line-height: 1.8;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .question-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #909399;
+  }
+
+  .question-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .reward-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+
+    .icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+// 回答卡片
+.answer-card {
+  @extend .campus-card;
+  margin-bottom: 16px;
+
+  .answer-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .user-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-right: 12px;
+    }
+
+    .user-info {
+      flex: 1;
+
+      .username {
+        font-size: 15px;
+        font-weight: 600;
+        color: #303133;
+      }
+
+      .user-meta {
+        font-size: 12px;
+        color: #909399;
+        margin-top: 4px;
+      }
+    }
+
+    .accepted-badge {
+      padding: 4px 12px;
+      background: linear-gradient(135deg, #67c23a 0%, #85ce61 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
+  .answer-content {
+    font-size: 14px;
+    color: #606266;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .answer-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: #909399;
+
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: #0056d2;
+      }
+
+      &.liked {
+        color: #ff6b6b;
+      }
+    }
+  }
+}
+
+// ==========================================
+// 玻璃拟态效果 (Glassmorphism)
+// ==========================================
+.glass-container {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+// 顶栏玻璃效果
+.glass-header {
+  @extend .glass-container;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+
+// 侧边栏玻璃效果
+.glass-sidebar {
+  @extend .glass-container;
+  border-radius: 12px;
+}
+
+// ==========================================
+// 按钮样式增强
+// ==========================================
+.campus-btn {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  // 点击波纹效果
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  &:active::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  // 点击缩放效果
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 主按钮
+.campus-btn-primary {
+  background: linear-gradient(135deg, #0056d2 0%, #0070f3 100%);
+  border: none;
+  color: #ffffff;
+
+  &:hover {
+    background: linear-gradient(135deg, #0045a8 0%, #0056d2 100%);
+    box-shadow: 0 4px 12px rgba(0, 86, 210, 0.3);
+  }
+}
+
+// 悬赏按钮
+.campus-btn-reward {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  border: none;
+  color: #ffffff;
+
+  &:hover {
+    background: linear-gradient(135deg, #ff5252 0%, #ff7043 100%);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+  }
+}
+
+// ==========================================
+// 标签样式
+// ==========================================
+.campus-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #f5f7fa;
+  color: #606266;
+  border-radius: 20px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+
+  &:hover {
+    background: #e6f0ff;
+    color: #0056d2;
+    border-color: #b3d8ff;
+  }
+
+  &.active {
+    background: #0056d2;
+    color: #ffffff;
+  }
+}
+
+// ==========================================
+// 骨架屏动画 (Skeleton)
+// ==========================================
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f5f7fa 25%,
+    #ebeef5 37%,
+    #f5f7fa 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+.skeleton-card {
+  @extend .campus-card;
+  cursor: default;
+
+  &:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .skeleton-title {
+    height: 24px;
+    width: 80%;
+    margin-bottom: 12px;
+    @extend .skeleton;
+  }
+
+  .skeleton-text {
+    height: 16px;
+    margin-bottom: 8px;
+    @extend .skeleton;
+
+    &:last-child {
+      width: 60%;
+    }
+  }
+
+  .skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    @extend .skeleton;
+  }
+}
+
+// ==========================================
+// 页面切换动画 (Fade-Slide-Up)
+// ==========================================
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+// ==========================================
+// 工具类
+// ==========================================
+
+// 文本省略
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Flex 布局
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// 间距
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.ml-8 {
+  margin-left: 8px;
+}
+
+.ml-16 {
+  margin-left: 16px;
+}
+
+.mr-8 {
+  margin-right: 8px;
+}
+
+.mr-16 {
+  margin-right: 16px;
+}
+
+.p-16 {
+  padding: 16px;
+}
+
+.p-24 {
+  padding: 24px;
+}
+
+// 颜色
+.text-primary {
+  color: #0056d2;
+}
+
+.text-success {
+  color: #67c23a;
+}
+
+.text-warning {
+  color: #e6a23c;
+}
+
+.text-danger {
+  color: #ff6b6b;
+}
+
+.text-info {
+  color: #909399;
+}
+
+.text-muted {
+  color: #c0c4cc;
+}
+
+// 字体大小
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 13px;
+}
+
+.text-base {
+  font-size: 14px;
+}
+
+.text-lg {
+  font-size: 16px;
+}
+
+.text-xl {
+  font-size: 18px;
+}
+
+.text-2xl {
+  font-size: 20px;
+}
+
+// 字体粗细
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+// 圆角
+.rounded {
+  border-radius: 4px;
+}
+
+.rounded-lg {
+  border-radius: 8px;
+}
+
+.rounded-xl {
+  border-radius: 12px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+// 阴影
+.shadow-sm {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-lg {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+// 鼠标指针
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// 禁用选择
+.select-none {
+  user-select: none;
+}
+
+// ==========================================
+// 响应式布局
+// ==========================================
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+
+  @media (min-width: 1920px) {
+    max-width: 1440px;
+  }
+}
+
+// ==========================================
+// 加载状态
+// ==========================================
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  color: #909399;
+}
+
+// ==========================================
+// 空状态
+// ==========================================
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  color: #909399;
+
+  .empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+
+  .empty-text {
+    font-size: 14px;
+    color: #909399;
+  }
+}
+
+// ==========================================
+// Element Plus MessageBox 居中修复
+// ==========================================
+.el-message-box {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  margin: 0 !important;
+}
+
+.el-overlay-message-box {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
