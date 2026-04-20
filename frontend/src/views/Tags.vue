@@ -430,23 +430,19 @@ const loadingRecommended = ref(false)
 const totalTags = ref(0)
 const totalQuestions = ref(0)
 
-// 分类列表 - 使用数据库中实际存在的分类
+// 分类列表 - 与后端 category 字段值保持一致
 const categories = ref([
-  { name: 'programming', label: '编程语言', icon: Monitor, count: 0 },
-  { name: 'frontend', label: '前端技术', icon: Monitor, count: 0 },
-  { name: 'backend', label: '后端技术', icon: Coffee, count: 0 },
+  { name: 'tech', label: '技术', icon: Monitor, count: 0 },
+  { name: 'frontend', label: '前端', icon: Reading, count: 0 },
+  { name: 'backend', label: '后端', icon: Tools, count: 0 },
   { name: 'database', label: '数据库', icon: Coin, count: 0 },
   { name: 'devops', label: 'DevOps', icon: Tools, count: 0 },
   { name: 'ai', label: '人工智能', icon: MagicStick, count: 0 },
   { name: 'algorithm', label: '算法', icon: Cpu, count: 0 },
-  { name: 'mobile', label: '移动开发', icon: Cellphone, count: 0 },
-  { name: 'cloud', label: '云计算', icon: Sunny, count: 0 },
-  { name: 'data', label: '大数据', icon: DataAnalysis, count: 0 },
-  { name: 'security', label: '安全', icon: Lock, count: 0 },
-  { name: 'testing', label: '测试', icon: CircleCheck, count: 0 },
-  { name: 'optimization', label: '性能优化', icon: Lightning, count: 0 },
-  { name: 'architecture', label: '架构', icon: Promotion, count: 0 },
-  { name: 'methodology', label: '方法论', icon: Compass, count: 0 },
+  { name: 'study', label: '学习', icon: Reading, count: 0 },
+  { name: 'life', label: '生活', icon: Coffee, count: 0 },
+  { name: 'career', label: '职业', icon: Briefcase, count: 0 },
+  { name: 'other', label: '其他', icon: MoreFilled, count: 0 },
 ])
 
 // 空状态文案
@@ -500,21 +496,29 @@ const loadTags = async () => {
     
     // 如果没有搜索关键词，更新分类统计
     if (!searchKeyword.value) {
-      // 获取所有标签以统计分类数量
-      const allTags = await getAllTags()
-      if (Array.isArray(allTags)) {
-        // 统计每个分类的标签数量
-        const categoryCountMap: Record<string, number> = {}
-        allTags.forEach(tag => {
-          const category = tag.category || 'other'
-          categoryCountMap[category] = (categoryCountMap[category] || 0) + 1
-        })
-        
-        // 更新分类数组的count属性
-        categories.value.forEach(category => {
-          category.count = categoryCountMap[category.name] || 0
-        })
-      }
+      // 使用分页接口获取每个分类的标签数量（避免 getAllTags 缓存问题）
+      const categoryCountMap: Record<string, number> = {}
+
+      // 并行获取所有分类的标签数量
+      const categoryPromises = categories.value.map(async (cat) => {
+        try {
+          // 使用较大的 size 确保获取该分类下所有标签
+          const result = await getTagList(1, 100, cat.name, 'hot')
+          return { name: cat.name, count: result?.total || 0 }
+        } catch {
+          return { name: cat.name, count: 0 }
+        }
+      })
+
+      const results = await Promise.all(categoryPromises)
+      results.forEach(r => {
+        categoryCountMap[r.name] = r.count
+      })
+
+      // 更新分类数组的count属性
+      categories.value.forEach(category => {
+        category.count = categoryCountMap[category.name] || 0
+      })
     }
   } catch (error) {
     console.error('加载标签列表失败：', error)

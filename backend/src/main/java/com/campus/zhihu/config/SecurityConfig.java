@@ -3,6 +3,7 @@ package com.campus.zhihu.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -147,6 +148,7 @@ public class SecurityConfig {
      * 只允许指定的域名，提高安全性
      */
     @Bean
+    @Primary
     @Profile("prod")
     public CorsConfigurationSource prodCorsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -156,6 +158,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
             "http://localhost:5173",  // 本地开发前端地址（如 Vite 默认端口）
             "http://localhost:3000",  // 本地开发前端地址（如 Create React App 默认端口）
+            "https://lplnb-del.github.io",  // GitHub Pages
             "https://your-frontend-domain.com"  // ⚠️ 请替换为实际的前端域名
         ));
 
