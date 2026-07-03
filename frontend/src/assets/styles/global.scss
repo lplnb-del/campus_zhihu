@@ -76,6 +76,24 @@ body {
   }
 }
 
+// 全局独立悬赏胶囊通用样式
+.reward-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  color: #ffffff !important;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+
+  .el-icon, .icon {
+    font-size: 14px;
+  }
+}
+
 // 问题卡片
 .question-card {
   @extend .campus-card;

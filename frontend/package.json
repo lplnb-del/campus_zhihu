@@ -9,6 +9,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:mock": "vite build --mode mock",
+    "build:docs": "node scripts/build-docs.mjs",
     "preview": "vite preview",
     "preview:mock": "vite preview --mode mock",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
