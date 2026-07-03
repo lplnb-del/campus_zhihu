@@ -125,11 +125,14 @@ campus_zhihu/
 │   ├── package.json                 # 依赖配置
 │   ├── tsconfig.json                # TypeScript 配置
 │   └── vite.config.ts               # Vite 配置
+├── database/                         # 数据库初始化脚本
+│   ├── init.sql                      # 数据库建表与初始化 SQL
+│   └── test_data.sql                 # 测试数据 SQL
 │
-├── docs/                            # 文档
-│   └── schema.sql                   # 数据库建表脚本
+├── .github/workflows/                # CI/CD 自动化流水线
+│   └── deploy.yml                    # GitHub Pages 自动部署配置
 │
-└── README.md                        # 项目说明文档
+└── README.md                         # 项目说明文档
 ```
 
 ## 🗄️ 数据库设计
@@ -146,7 +149,7 @@ campus_zhihu/
 8. **biz_collection** - 收藏表：用户收藏的问题
 9. **biz_like_record** - 点赞记录表：防止重复点赞
 
-详细建表语句请查看：`docs/schema.sql`
+详细建表与初始化语句请查看：`database/init.sql`与`database/test_data.sql`
 
 ## 🎨 UI/UX 设计规范
 
@@ -191,8 +194,8 @@ campus_zhihu/
 # 1. 进入后端目录
 cd backend
 
-# 2. 创建数据库并导入 schema.sql
-mysql -u root -p < ../docs/schema.sql
+# 2. 创建数据库并导入初始化脚本
+mysql -u root -p < ../database/init.sql
 
 # 3. 修改配置文件
 # 编辑 src/main/resources/application.yml
@@ -214,11 +217,19 @@ cd frontend
 # 2. 安装依赖
 pnpm install
 
-# 3. 启动开发服务器
+# 3. 启动开发服务器（联调真实后端 API 模式）
 pnpm dev
+
+# 4. （可选）纯前端独立演示模式（使用 Mock 数据，无需后端服务器）
+pnpm run preview:mock
 
 # 启动成功后访问：http://localhost:3000
 ```
+
+### 🌐 CI/CD 自动化在线发版
+
+项目配置了完整的 **GitHub Actions 持续集成与持续部署（CI/CD）流水线**（查看 `.github/workflows/deploy.yml`）。
+当代码推送到 `master` 分支时，云端自动使用 Node.js 构建生成纯净的前端单页演示应用（SPA），并即时发布更新至 GitHub Pages 在线演示站点。
 
 ## 📝 核心业务逻辑
 
