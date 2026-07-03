@@ -867,6 +867,7 @@ onMounted(() => {
           display: flex;
           align-items: center;
           gap: 4px;
+          color: #ffffff !important;
           font-weight: 600;
 
           .el-icon {
