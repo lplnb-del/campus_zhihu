@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:mock": "vite build --mode mock",
     "preview": "vite preview",
+    "preview:mock": "vite preview --mode mock",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
@@ -36,6 +38,7 @@
     "@typescript-eslint/parser": "^6.15.0",
     "@vitejs/plugin-vue": "^5.0.0",
     "@vue/tsconfig": "^0.5.1",
+    "axios-mock-adapter": "^2.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-vue": "^9.19.2",
     "prettier": "^3.1.1",

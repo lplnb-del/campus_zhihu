@@ -8,10 +8,17 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import router from './router'
 import App from './App.vue'
+import { setupMock } from './mock'
 
 // 全局样式
 import './assets/styles/global.scss'
 import 'nprogress/nprogress.css'
+
+// Mock 模式：仅在 VITE_USE_MOCK=true 时启用
+// GitHub Pages 静态部署使用 Mock 数据，本地开发可连接真实后端
+if (import.meta.env.VITE_USE_MOCK === 'true') {
+  setupMock()
+}
 
 // 创建 Vue 应用实例
 const app = createApp(App)
